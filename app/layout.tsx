@@ -52,10 +52,7 @@ export default function RootLayout({
       lang="es-MX"
       className={`${fraunces.variable} ${workSans.variable} ${spaceMono.variable}`}
     >
-      <body>
-        <div className="grain" aria-hidden="true" />
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
