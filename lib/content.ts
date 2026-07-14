@@ -2,9 +2,11 @@ export const RESTAURANT = {
   name: "Aldeano Restaurante",
   city: "Mexicali, Baja California",
   address: "C. Novena 679, 21376 Mexicali, B.C.",
+  // Shown on the site and dialed by tap-to-call.
   phoneDisplay: "+52 686 842 9240",
   phoneTel: "+526868429240",
-  whatsapp: "526868429240",
+  // Where reservation messages are sent — deliberately a different line.
+  whatsapp: "526865050041",
   mapEmbed:
     "https://www.google.com/maps?q=C.+Novena+679,+21376+Mexicali,+B.C.&output=embed",
 } as const;
