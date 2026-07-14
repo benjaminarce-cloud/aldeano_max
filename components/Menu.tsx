@@ -1,0 +1,127 @@
+"use client";
+
+import { useRef, useState } from "react";
+import SectionHead from "./SectionHead";
+import { MENU, type Dish } from "@/lib/content";
+
+function DishRow({ dish }: { dish: Dish }) {
+  return (
+    <li className="mb-[26px] flex justify-between gap-[18px]">
+      <div>
+        <h4 className="font-serif text-[1.14rem] font-medium">{dish.name}</h4>
+        {dish.tag ? (
+          <span className="mt-[3px] block font-mono text-[.7rem] uppercase tracking-[.06em] text-nopal">
+            {dish.tag}
+          </span>
+        ) : null}
+        <p className="mt-1 max-w-[360px] text-[.87rem] font-light text-cal-dim">
+          {dish.desc}
+        </p>
+        {dish.note ? (
+          <p className="mt-1 max-w-[360px] text-[.87rem] font-light italic text-cal-dim">
+            {dish.note}
+          </p>
+        ) : null}
+      </div>
+      <span className="whitespace-nowrap pt-[3px] font-mono text-[.9rem] text-oro">
+        {dish.price}
+      </span>
+    </li>
+  );
+}
+
+export default function Menu() {
+  const [active, setActive] = useState(MENU[0].id);
+  const tabsRef = useRef<(HTMLButtonElement | null)[]>([]);
+
+  // Roving arrow-key navigation across the tablist.
+  function onKeyDown(e: React.KeyboardEvent, index: number) {
+    const delta = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+    if (!delta) return;
+    e.preventDefault();
+    const next = (index + delta + MENU.length) % MENU.length;
+    setActive(MENU[next].id);
+    tabsRef.current[next]?.focus();
+  }
+
+  return (
+    <section id="menu" className="bg-bg-deep py-[110px]">
+      <div className="wrap">
+        <SectionHead
+          num="02 — El menú"
+          title={
+            <>
+              La carta de{" "}
+              <em className="font-semibold italic text-achiote">Aldeano</em>
+            </>
+          }
+          lead="Nueve tiempos, una sola idea: recetas de generaciones con la firma del Chef Beto González."
+        />
+
+        <div
+          role="tablist"
+          aria-label="Categorías del menú"
+          className="mb-12 flex flex-wrap gap-2.5"
+        >
+          {MENU.map((cat, i) => {
+            const selected = cat.id === active;
+            return (
+              <button
+                key={cat.id}
+                ref={(el) => {
+                  tabsRef.current[i] = el;
+                }}
+                role="tab"
+                id={`tab-${cat.id}`}
+                aria-selected={selected}
+                aria-controls={`panel-${cat.id}`}
+                tabIndex={selected ? 0 : -1}
+                onClick={() => setActive(cat.id)}
+                onKeyDown={(e) => onKeyDown(e, i)}
+                className={`rounded-[20px] border px-[18px] py-2.5 font-mono text-[.72rem] uppercase tracking-[.06em] transition-colors duration-200 ${
+                  selected
+                    ? "border-achiote bg-achiote text-cal"
+                    : "border-[rgba(241,232,217,.22)] text-cal-dim hover:border-oro hover:text-cal"
+                }`}
+              >
+                {cat.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Every panel stays in the DOM so the full carta is crawlable; only
+            the active one is shown. */}
+        {MENU.map((cat) => {
+          const half = Math.ceil(cat.dishes.length / 2);
+          const columns = [cat.dishes.slice(0, half), cat.dishes.slice(half)];
+          const selected = cat.id === active;
+
+          return (
+            <div
+              key={cat.id}
+              role="tabpanel"
+              id={`panel-${cat.id}`}
+              aria-labelledby={`tab-${cat.id}`}
+              hidden={!selected}
+              className={
+                selected
+                  ? "grid animate-fadeIn grid-cols-1 gap-x-[70px] lg:grid-cols-2"
+                  : undefined
+              }
+            >
+              <h3 className="sr-only">{cat.label}</h3>
+              {columns.map((col, i) => (
+                <ul key={i}>
+                  {col.map((dish) => (
+                    <DishRow key={dish.name} dish={dish} />
+                  ))}
+                </ul>
+              ))}
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
