@@ -30,12 +30,13 @@ export default function Hero() {
         <p className="mb-[22px] flex items-center gap-3 font-mono text-xs uppercase tracking-[.18em] text-oro before:h-px before:w-[26px] before:bg-oro before:content-['']">
           {RESTAURANT.city}
         </p>
-        <h1 className="max-w-[900px] font-serif text-[clamp(3.2rem,9vw,7.4rem)] font-[340] leading-[.92] tracking-[-.01em]">
-          Cocina de
+        <h1 className="max-w-[900px] font-serif text-[clamp(2.8rem,7.5vw,6.2rem)] font-[340] leading-[.95] tracking-[-.01em]">
+          Somos la mezcla
           <br />
-          <em className="font-semibold italic text-achiote">pueblo</em>, mesa
-          <br />
-          de barrio.
+          de lo{" "}
+          <em className="font-semibold italic text-achiote">rural</em>
+          <br />a lo{" "}
+          <em className="font-semibold italic text-achiote">urbano</em>.
         </h1>
         <p className="mt-[26px] max-w-[440px] text-[1.05rem] font-light text-cal-dim">
           Platos de fuego lento, ingredientes de temporada y las recetas que se

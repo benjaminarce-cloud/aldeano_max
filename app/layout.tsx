@@ -25,7 +25,7 @@ const spaceMono = Space_Mono({
 });
 
 const description =
-  "Platos de fuego lento, ingredientes de temporada y las recetas que se cuentan de cocina en cocina. Cocina de pueblo, mesa de barrio en Mexicali, B.C.";
+  "Platos de fuego lento, ingredientes de temporada y las recetas que se cuentan de cocina en cocina. Somos la mezcla de lo rural a lo urbano, en Mexicali, B.C.";
 
 export const metadata: Metadata = {
   title: "Aldeano Restaurante — Mexicali, B.C.",
