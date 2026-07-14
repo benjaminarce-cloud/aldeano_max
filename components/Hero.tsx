@@ -35,7 +35,7 @@ export default function Hero() {
           <br />
           de lo{" "}
           <em className="font-semibold italic text-achiote">rural</em>
-          <br />a lo{" "}
+          <br />y lo{" "}
           <em className="font-semibold italic text-achiote">urbano</em>.
         </h1>
         <p className="mt-[26px] max-w-[440px] text-[1.05rem] font-light text-cal-dim">
