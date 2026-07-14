@@ -333,7 +333,7 @@ export type GalleryItem = {
 export const GALLERY: GalleryItem[] = [
   {
     caption: "Planta alta · salón principal",
-    // src: "/images/interior-1.png",
+    src: "/images/interior-1.png",
     gradient: "radial-gradient(circle at 30% 30%, #7a4326, #2c1a10 75%)",
     span: "col-span-2 row-span-2",
   },
@@ -344,7 +344,7 @@ export const GALLERY: GalleryItem[] = [
   },
   {
     caption: "Planta baja · barra y doble altura",
-    // src: "/images/interior-2.png",
+    src: "/images/interior-2.png",
     gradient: "radial-gradient(circle at 40% 60%, #a8652f, #331e0f 75%)",
     span: "col-span-1 row-span-1",
   },
