@@ -2,17 +2,18 @@
 
 import { useEffect, useMemo, useState } from "react";
 import SectionHead from "./SectionHead";
-import {
-  DAY_NAMES,
-  HOURS,
-  HOURS_SUMMARY,
-  RESTAURANT,
-} from "@/lib/content";
+import { createClient } from "@/lib/supabase/client";
+import { DAY_NAMES, HOURS, HOURS_SUMMARY, RESTAURANT } from "@/lib/content";
 
-function timeLabel(hour: number) {
+type Slot = { value: string; label: string };
+
+function toSlot(hour: number): Slot {
   const period = hour >= 12 ? "PM" : "AM";
   const hour12 = hour % 12 === 0 ? 12 : hour % 12;
-  return `${hour12}:00 ${period}`;
+  return {
+    value: `${String(hour).padStart(2, "0")}:00:00`,
+    label: `${hour12}:00 ${period}`,
+  };
 }
 
 /** Parse a yyyy-mm-dd value as a local date, not UTC. */
@@ -28,6 +29,7 @@ export default function Reservaciones() {
   const [minDate, setMinDate] = useState("");
   const [fecha, setFecha] = useState("");
   const [hora, setHora] = useState("");
+  const [pending, setPending] = useState(false);
   const [msg, setMsg] = useState<{ text: string; tone: "err" | "ok" } | null>(
     null,
   );
@@ -50,8 +52,8 @@ export default function Reservaciones() {
 
   const slots = useMemo(() => {
     if (!range) return [];
-    const out: string[] = [];
-    for (let h = range.start; h <= range.end - 1; h++) out.push(timeLabel(h));
+    const out: Slot[] = [];
+    for (let h = range.start; h <= range.end - 1; h++) out.push(toSlot(h));
     return out;
   }, [range]);
 
@@ -61,26 +63,69 @@ export default function Reservaciones() {
     const nextRange = value ? HOURS[parseLocalDate(value).getDay()] : undefined;
     setMsg(
       nextRange === null
-        ? { text: "Aldeano está cerrado los lunes. Elige otra fecha.", tone: "err" }
+        ? {
+            text: "Aldeano está cerrado los lunes. Elige otra fecha.",
+            tone: "err",
+          }
         : null,
     );
   }
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (pending) return;
+
     const data = new FormData(e.currentTarget);
     const nombre = String(data.get("nombre") ?? "").trim();
     const telefono = String(data.get("telefono") ?? "").trim();
     const personas = String(data.get("personas") ?? "");
-    const notas = String(data.get("notas") ?? "").trim();
+    const notasInput = String(data.get("notas") ?? "").trim();
 
     if (!nombre || !telefono || !fecha || !hora || !personas) {
       setMsg({ text: "Completa todos los campos requeridos.", tone: "err" });
       return;
     }
 
+    // Open the tab now, while we still have the click gesture — a popup opened
+    // after the await would be blocked. We point it at the URL once the row lands.
+    const tab = window.open("", "_blank", "noopener,noreferrer");
+
+    setPending(true);
+    setMsg({ text: "Enviando tu reservación...", tone: "ok" });
+
+    // `personas` is an int column; "8+" is stored as 8 and the exact choice is
+    // preserved in the notes so staff don't lose it.
+    const esGrupoGrande = personas === "8+";
+    const notas =
+      [esGrupoGrande ? "Grupo de 8 o más personas" : "", notasInput]
+        .filter(Boolean)
+        .join(" · ") || null;
+
+    const supabase = createClient();
+    const { error } = await supabase.from("reservations").insert({
+      nombre,
+      telefono,
+      fecha,
+      hora,
+      personas: esGrupoGrande ? 8 : Number(personas),
+      notas,
+      estatus: "pendiente",
+    });
+
+    setPending(false);
+
+    if (error) {
+      tab?.close();
+      setMsg({
+        text: "No pudimos guardar tu reservación. Llámanos al 686 842 9240.",
+        tone: "err",
+      });
+      return;
+    }
+
     const date = parseLocalDate(fecha);
     const legible = `${DAY_NAMES[date.getDay()]} ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    const horaLabel = slots.find((s) => s.value === hora)?.label ?? hora;
 
     const lines = [
       "Hola Aldeano, quiero reservar una mesa.",
@@ -88,17 +133,20 @@ export default function Reservaciones() {
       `Nombre: ${nombre}`,
       `Teléfono: ${telefono}`,
       `Fecha: ${legible}`,
-      `Hora: ${hora}`,
+      `Hora: ${horaLabel}`,
       `Personas: ${personas}`,
     ];
-    if (notas) lines.push(`Notas: ${notas}`);
+    if (notasInput) lines.push(`Notas: ${notasInput}`);
 
     const url = `https://wa.me/${RESTAURANT.whatsapp}?text=${encodeURIComponent(lines.join("\n"))}`;
+
     setMsg({
-      text: "Abriendo WhatsApp para confirmar tu reservación...",
+      text: "¡Reservación recibida! Abriendo WhatsApp para confirmarla...",
       tone: "ok",
     });
-    window.open(url, "_blank", "noopener,noreferrer");
+
+    if (tab) tab.location.href = url;
+    else window.open(url, "_blank", "noopener,noreferrer");
   }
 
   const fieldClass =
@@ -149,13 +197,25 @@ export default function Reservaciones() {
           <form onSubmit={onSubmit} noValidate className="px-8 py-14 sm:px-12">
             <div className="mb-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div className="flex flex-col gap-2">
-                <label htmlFor="nombre" className="font-mono text-[.68rem] uppercase tracking-[.08em] text-cal-dim">
+                <label
+                  htmlFor="nombre"
+                  className="font-mono text-[.68rem] uppercase tracking-[.08em] text-cal-dim"
+                >
                   Nombre
                 </label>
-                <input id="nombre" name="nombre" type="text" required className={fieldClass} />
+                <input
+                  id="nombre"
+                  name="nombre"
+                  type="text"
+                  required
+                  className={fieldClass}
+                />
               </div>
               <div className="flex flex-col gap-2">
-                <label htmlFor="telefono" className="font-mono text-[.68rem] uppercase tracking-[.08em] text-cal-dim">
+                <label
+                  htmlFor="telefono"
+                  className="font-mono text-[.68rem] uppercase tracking-[.08em] text-cal-dim"
+                >
                   Teléfono
                 </label>
                 <input
@@ -171,7 +231,10 @@ export default function Reservaciones() {
 
             <div className="mb-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div className="flex flex-col gap-2">
-                <label htmlFor="fecha" className="font-mono text-[.68rem] uppercase tracking-[.08em] text-cal-dim">
+                <label
+                  htmlFor="fecha"
+                  className="font-mono text-[.68rem] uppercase tracking-[.08em] text-cal-dim"
+                >
                   Fecha
                 </label>
                 <input
@@ -186,7 +249,10 @@ export default function Reservaciones() {
                 />
               </div>
               <div className="flex flex-col gap-2">
-                <label htmlFor="hora" className="font-mono text-[.68rem] uppercase tracking-[.08em] text-cal-dim">
+                <label
+                  htmlFor="hora"
+                  className="font-mono text-[.68rem] uppercase tracking-[.08em] text-cal-dim"
+                >
                   Hora
                 </label>
                 <select
@@ -206,8 +272,8 @@ export default function Reservaciones() {
                     <>
                       <option value="">Selecciona una hora</option>
                       {slots.map((slot) => (
-                        <option key={slot} value={slot}>
-                          {slot}
+                        <option key={slot.value} value={slot.value}>
+                          {slot.label}
                         </option>
                       ))}
                     </>
@@ -218,7 +284,10 @@ export default function Reservaciones() {
 
             <div className="mb-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div className="flex flex-col gap-2">
-                <label htmlFor="personas" className="font-mono text-[.68rem] uppercase tracking-[.08em] text-cal-dim">
+                <label
+                  htmlFor="personas"
+                  className="font-mono text-[.68rem] uppercase tracking-[.08em] text-cal-dim"
+                >
                   Personas
                 </label>
                 <select
@@ -237,7 +306,10 @@ export default function Reservaciones() {
                 </select>
               </div>
               <div className="flex flex-col gap-2">
-                <label htmlFor="notas" className="font-mono text-[.68rem] uppercase tracking-[.08em] text-cal-dim">
+                <label
+                  htmlFor="notas"
+                  className="font-mono text-[.68rem] uppercase tracking-[.08em] text-cal-dim"
+                >
                   Notas (opcional)
                 </label>
                 <input
@@ -252,10 +324,10 @@ export default function Reservaciones() {
 
             <button
               type="submit"
-              disabled={isClosedDay}
+              disabled={isClosedDay || pending}
               className="mt-2 w-full rounded-sm bg-achiote p-4 font-mono text-[.8rem] uppercase tracking-[.08em] text-cal transition-colors hover:bg-oro disabled:cursor-not-allowed disabled:bg-[#5a4a3d]"
             >
-              Confirmar por WhatsApp
+              {pending ? "Enviando..." : "Confirmar por WhatsApp"}
             </button>
 
             <p
