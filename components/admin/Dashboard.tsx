@@ -155,7 +155,7 @@ export default function Dashboard({
     setCursor((c) => addDays(c, view === "week" ? 7 * dir : dir));
 
   return (
-    <div className="mx-auto max-w-[1100px] px-7 pb-20 pt-9">
+    <div className="mx-auto max-w-[1100px] px-5 pb-20 pt-9 sm:px-7">
       <header className="mb-1.5 flex flex-wrap items-center justify-between gap-4">
         <div>
           <Logo className="text-2xl" />
@@ -163,7 +163,7 @@ export default function Dashboard({
             Panel de reservaciones
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           <span className="hidden font-mono text-[.68rem] text-cal-dim sm:inline">
             {email}
           </span>
@@ -230,30 +230,30 @@ export default function Dashboard({
           ))}
         </div>
 
-        <div className="flex items-center gap-3.5">
+        <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5">
           <button
             onClick={() => shift(-1)}
             aria-label={view === "day" ? "Día anterior" : "Semana anterior"}
-            className="h-[34px] w-[34px] rounded-full border border-[rgba(241,232,217,.25)] text-cal transition-colors hover:border-oro"
+            className="h-[34px] w-[34px] shrink-0 rounded-full border border-[rgba(241,232,217,.25)] text-cal transition-colors hover:border-oro"
           >
             ‹
           </button>
           <div
             aria-live="polite"
-            className="min-w-[200px] text-center font-serif text-[1.2rem] first-letter:uppercase"
+            className="min-w-[130px] text-center font-serif text-[1.05rem] first-letter:uppercase sm:min-w-[200px] sm:text-[1.2rem]"
           >
             {dateLabel}
           </div>
           <button
             onClick={() => shift(1)}
             aria-label={view === "day" ? "Día siguiente" : "Semana siguiente"}
-            className="h-[34px] w-[34px] rounded-full border border-[rgba(241,232,217,.25)] text-cal transition-colors hover:border-oro"
+            className="h-[34px] w-[34px] shrink-0 rounded-full border border-[rgba(241,232,217,.25)] text-cal transition-colors hover:border-oro"
           >
             ›
           </button>
           <button
             onClick={() => setCursor(new Date())}
-            className="rounded-[14px] border border-oro px-3.5 py-[7px] font-mono text-[.68rem] uppercase text-oro transition-colors hover:bg-oro hover:text-bg-deep"
+            className="shrink-0 rounded-[14px] border border-oro px-3.5 py-[7px] font-mono text-[.68rem] uppercase text-oro transition-colors hover:bg-oro hover:text-bg-deep"
           >
             Hoy
           </button>

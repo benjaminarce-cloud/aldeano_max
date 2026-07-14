@@ -37,8 +37,32 @@ export default function ReservationModal({
     firstFieldRef.current?.focus();
 
     function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      // Keep Tab inside the dialog — otherwise focus walks into the dashboard
+      // behind the overlay, which a screen-reader user can't see is blocked.
+      const focusables = dialogRef.current?.querySelectorAll<HTMLElement>(
+        'input, select, textarea, button, [href], [tabindex]:not([tabindex="-1"])',
+      );
+      if (!focusables?.length) return;
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement;
+
+      if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
     }
+
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, [open, onClose]);
