@@ -320,44 +320,21 @@ export const MENU: MenuCategory[] = [
 /* ---------- galería ---------- */
 
 /**
- * To swap a gradient placeholder for a real photo: drop the file into
- * /public/images/ and add `src: "/images/your-photo.png"` to that item.
- * Items without `src` render their `gradient` instead.
+ * To add a photo: drop the file into /public/images/ and append an item here.
+ * The grid lays tiles out evenly, so no span classes to keep in sync.
  */
 export type GalleryItem = {
   caption: string;
-  src?: string;
-  gradient: string;
-  /** Tailwind span classes for the asymmetric grid. */
-  span: string;
+  src: string;
 };
 
 export const GALLERY: GalleryItem[] = [
   {
     caption: "Planta alta · salón principal",
     src: "/images/interior-1.png",
-    gradient: "radial-gradient(circle at 30% 30%, #7a4326, #2c1a10 75%)",
-    span: "col-span-2 row-span-2",
-  },
-  {
-    caption: "Detalles y texturas",
-    gradient: "radial-gradient(circle at 70% 40%, #5c6b41, #23281b 75%)",
-    span: "col-span-1 row-span-1",
   },
   {
     caption: "Planta baja · barra y doble altura",
     src: "/images/interior-2.png",
-    gradient: "radial-gradient(circle at 40% 60%, #a8652f, #331e0f 75%)",
-    span: "col-span-1 row-span-1",
-  },
-  {
-    caption: "Terraza",
-    gradient: "radial-gradient(circle at 60% 30%, #8f3a22, #2c130b 75%)",
-    span: "col-span-1 row-span-1",
-  },
-  {
-    caption: "Rincones de la casa",
-    gradient: "radial-gradient(circle at 50% 60%, #b98b3e, #34260f 75%)",
-    span: "col-span-1 row-span-1",
   },
 ];
