@@ -2,11 +2,17 @@
 
 import { useRef, useState } from "react";
 import SectionHead from "./SectionHead";
-import { MENU, type Dish } from "@/lib/content";
+import { MENU, MENU_NOTE, type Dish } from "@/lib/content";
 
 function DishRow({ dish }: { dish: Dish }) {
   return (
-    <li className="mb-[26px] flex justify-between gap-[18px]">
+    // Bar and extras rows are a single line, so they get a tighter rhythm than
+    // the dishes that carry a description.
+    <li
+      className={`flex justify-between gap-[18px] ${
+        dish.desc ? "mb-[26px]" : "mb-3"
+      }`}
+    >
       <div>
         <h4 className="font-serif text-[1.14rem] font-medium">{dish.name}</h4>
         {dish.tag ? (
@@ -14,9 +20,11 @@ function DishRow({ dish }: { dish: Dish }) {
             {dish.tag}
           </span>
         ) : null}
-        <p className="mt-1 max-w-[360px] text-[.87rem] font-light text-cal-dim">
-          {dish.desc}
-        </p>
+        {dish.desc ? (
+          <p className="mt-1 max-w-[360px] text-[.87rem] font-light text-cal-dim">
+            {dish.desc}
+          </p>
+        ) : null}
         {dish.note ? (
           <p className="mt-1 max-w-[360px] text-[.87rem] font-light italic text-cal-dim">
             {dish.note}
@@ -55,7 +63,7 @@ export default function Menu() {
               <em className="font-semibold italic text-achiote">Aldeano</em>
             </>
           }
-          lead="Nueve tiempos, una sola idea: recetas de generaciones con la firma del Chef Beto González."
+          lead="Una sola idea de la entrada a la barra: recetas de generaciones con la firma del Chef Beto González."
         />
 
         <div
@@ -121,6 +129,10 @@ export default function Menu() {
             </div>
           );
         })}
+
+        <p className="mt-12 max-w-[760px] border-t border-[rgba(241,232,217,.14)] pt-6 text-[.72rem] font-light leading-relaxed text-cal-dim">
+          {MENU_NOTE}
+        </p>
       </div>
     </section>
   );
