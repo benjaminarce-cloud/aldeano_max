@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import SectionHead from "./SectionHead";
+import Reveal from "./Reveal";
 import { createClient } from "@/lib/supabase/client";
 import { DAY_NAMES, HOURS, HOURS_SUMMARY, RESTAURANT } from "@/lib/content";
 
@@ -164,15 +165,17 @@ export default function Reservaciones() {
   return (
     <section id="reservar" className="bg-bg pb-[130px] pt-[120px]">
       <div className="wrap">
-        <SectionHead
-          num="06 — Reservaciones"
-          title={
-            <>
-              Aparta tu{" "}
-              <em className="font-semibold italic text-achiote">mesa</em>
-            </>
-          }
-        />
+        <Reveal>
+          <SectionHead
+            num="06 — Reservaciones"
+            title={
+              <>
+                Aparta tu{" "}
+                <em className="font-semibold italic text-achiote">mesa</em>
+              </>
+            }
+          />
+        </Reveal>
 
         <div className="grid grid-cols-1 overflow-hidden rounded-[3px] border border-[rgba(185,139,62,.25)] bg-card lg:grid-cols-[.9fr_1.1fr]">
           {/* Ticket stub */}

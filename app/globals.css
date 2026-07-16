@@ -59,5 +59,10 @@
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+    /* Staggered entrances hold their start state during the delay. Without
+       zeroing these, a reduced-motion visitor waits out the stagger looking
+       at nothing. */
+    animation-delay: 0.001ms !important;
+    transition-delay: 0.001ms !important;
   }
 }

@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import SectionHead from "./SectionHead";
 import DishRow from "./DishRow";
+import Reveal from "./Reveal";
 import { MENU, MENU_NOTE } from "@/lib/content";
 
 export default function Menu() {
@@ -22,16 +23,20 @@ export default function Menu() {
   return (
     <section id="menu" className="bg-bg-deep py-[110px]">
       <div className="wrap">
-        <SectionHead
-          num="03 — El menú"
-          title={
-            <>
-              La carta de{" "}
-              <em className="font-semibold italic text-achiote">Aldeano</em>
-            </>
-          }
-          lead="Una sola idea de la entrada a la barra: recetas de generaciones con la firma del Chef Beto González."
-        />
+        {/* Only the heading reveals. The panels below already fade in on tab
+            change, and stacking the two would fight. */}
+        <Reveal>
+          <SectionHead
+            num="03 — El menú"
+            title={
+              <>
+                La carta de{" "}
+                <em className="font-semibold italic text-achiote">Aldeano</em>
+              </>
+            }
+            lead="Una sola idea de la entrada a la barra: recetas de generaciones con la firma del Chef Beto González."
+          />
+        </Reveal>
 
         {/* Fourteen categories wrap to six rows on a phone — 293px of tabs
             before the first dish. Below md they scroll sideways in one row;

@@ -1,8 +1,10 @@
+import Reveal from "./Reveal";
+
 export default function Historia() {
   return (
     <section id="historia" className="bg-bg py-[120px]">
       <div className="wrap grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.1fr_.9fr] lg:gap-[70px]">
-        <div>
+        <Reveal>
           <span className="sec-num">01 — Nuestra historia</span>
           <h2 className="font-serif text-[clamp(2.2rem,4.5vw,3.4rem)] font-[340] leading-[1.05]">
             Como en <em className="font-semibold italic text-achiote">la aldea</em>,
@@ -24,11 +26,13 @@ export default function Historia() {
             la técnica de una cocina moderna, servidas en un espacio pensado
             para quedarse y compartir.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="mx-auto flex h-[168px] w-[168px] rotate-[-9deg] items-center justify-center rounded-full border-[1.5px] border-dashed border-oro p-5 text-center font-mono text-[.68rem] uppercase leading-relaxed tracking-[.1em] text-oro">
-          Receta del abuelo Alberto · Desde 1954
-        </div>
+        <Reveal delay={120}>
+          <div className="mx-auto flex h-[168px] w-[168px] rotate-[-9deg] items-center justify-center rounded-full border-[1.5px] border-dashed border-oro p-5 text-center font-mono text-[.68rem] uppercase leading-relaxed tracking-[.1em] text-oro">
+            Receta del abuelo Alberto · Desde 1954
+          </div>
+        </Reveal>
       </div>
     </section>
   );

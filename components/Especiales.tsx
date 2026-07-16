@@ -1,5 +1,6 @@
 import SectionHead from "./SectionHead";
 import DishRow from "./DishRow";
+import Reveal from "./Reveal";
 import { SPECIALS } from "@/lib/content";
 
 /**
@@ -11,18 +12,23 @@ export default function Especiales() {
   return (
     <section id="especiales" className="bg-bg pb-[110px]">
       <div className="wrap">
-        <SectionHead
-          num="02 — Recomendaciones"
-          title={
-            <>
-              Fuera de{" "}
-              <em className="font-semibold italic text-achiote">carta</em>
-            </>
-          }
-          lead="Las recomendaciones del Chef Beto González y lo nuevo de la casa, por tiempo limitado."
-        />
+        <Reveal>
+          <SectionHead
+            num="02 — Recomendaciones"
+            title={
+              <>
+                Fuera de{" "}
+                <em className="font-semibold italic text-achiote">carta</em>
+              </>
+            }
+            lead="Las recomendaciones del Chef Beto González y lo nuevo de la casa, por tiempo limitado."
+          />
+        </Reveal>
 
-        <div className="rounded-sm border border-[rgba(185,139,62,.3)] bg-card px-6 py-10 sm:px-10 sm:py-12">
+        <Reveal
+          delay={90}
+          className="rounded-sm border border-[rgba(185,139,62,.3)] bg-card px-6 py-10 sm:px-10 sm:py-12"
+        >
           <span className="mb-10 inline-block rounded-[20px] border border-achiote px-3.5 py-1.5 font-mono text-[.66rem] uppercase tracking-[.14em] text-achiote">
             Por tiempo limitado
           </span>
@@ -46,7 +52,7 @@ export default function Especiales() {
               </ul>
             </div>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

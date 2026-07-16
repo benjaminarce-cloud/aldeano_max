@@ -30,7 +30,9 @@ const config: Config = {
         },
       },
       animation: {
-        fadeIn: "fadeIn .35s ease",
+        // `both` so a delayed element stays hidden until its turn rather than
+        // flashing in first and then animating.
+        fadeIn: "fadeIn .35s ease both",
       },
     },
   },

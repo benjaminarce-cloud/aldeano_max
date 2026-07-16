@@ -52,6 +52,15 @@ export default function RootLayout({
       lang="es-MX"
       className={`${fraunces.variable} ${workSans.variable} ${spaceMono.variable}`}
     >
+      <head>
+        {/* Reveal-on-scroll hides its children until an observer fires. With no
+            JS that never happens, so the content must not stay hidden. */}
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html: `<style>[data-reveal]{opacity:1!important;transform:none!important}</style>`,
+          }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

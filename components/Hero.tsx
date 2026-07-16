@@ -26,11 +26,17 @@ export default function Hero() {
         />
       </svg>
 
+      {/* The entrance is CSS-only: no observer, no hydration, and it still
+          plays if JS never arrives. Delays stagger the four blocks in reading
+          order; prefers-reduced-motion zeroes both duration and delay. */}
       <div className="wrap relative">
-        <p className="mb-[22px] flex items-center gap-3 font-mono text-xs uppercase tracking-[.18em] text-oro before:h-px before:w-[26px] before:bg-oro before:content-['']">
+        <p className="mb-[22px] flex animate-fadeIn items-center gap-3 font-mono text-xs uppercase tracking-[.18em] text-oro before:h-px before:w-[26px] before:bg-oro before:content-['']">
           {RESTAURANT.city}
         </p>
-        <h1 className="max-w-[900px] font-serif text-[clamp(2.8rem,7.5vw,6.2rem)] font-[340] leading-[.95] tracking-[-.01em]">
+        <h1
+          style={{ animationDelay: "90ms" }}
+          className="max-w-[900px] animate-fadeIn font-serif text-[clamp(2.8rem,7.5vw,6.2rem)] font-[340] leading-[.95] tracking-[-.01em]"
+        >
           Somos la mezcla
           <br />
           de lo{" "}
@@ -38,11 +44,17 @@ export default function Hero() {
           <br />y lo{" "}
           <em className="font-semibold italic text-achiote">urbano</em>.
         </h1>
-        <p className="mt-[26px] max-w-[440px] text-[1.05rem] font-light text-cal-dim">
+        <p
+          style={{ animationDelay: "180ms" }}
+          className="mt-[26px] max-w-[440px] animate-fadeIn text-[1.05rem] font-light text-cal-dim"
+        >
           Platos de fuego lento, ingredientes de temporada y las recetas que se
           cuentan de cocina en cocina. Bienvenido a la mesa del pueblo.
         </p>
-        <div className="mt-11 flex flex-wrap gap-4">
+        <div
+          style={{ animationDelay: "270ms" }}
+          className="mt-11 flex animate-fadeIn flex-wrap gap-4"
+        >
           <a href="#reservar" className="btn btn-solid">
             Reservar mesa
           </a>
