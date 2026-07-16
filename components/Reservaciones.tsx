@@ -87,8 +87,11 @@ export default function Reservaciones() {
     }
 
     // Open the tab now, while we still have the click gesture — a popup opened
-    // after the await would be blocked. We point it at the URL once the row lands.
-    const tab = window.open("", "_blank", "noopener,noreferrer");
+    // after the await would be blocked. We point it at the URL once the row
+    // lands, which needs a handle back, so `noopener` must stay off here: it
+    // makes window.open return null. The opener link is severed below instead,
+    // before the tab is ever navigated off about:blank.
+    const tab = window.open("", "_blank");
 
     setPending(true);
     setMsg({ text: "Enviando tu reservación...", tone: "ok" });
@@ -145,8 +148,14 @@ export default function Reservaciones() {
       tone: "ok",
     });
 
-    if (tab) tab.location.href = url;
-    else window.open(url, "_blank", "noopener,noreferrer");
+    if (tab) {
+      tab.opener = null;
+      // replace() so the tab's back button doesn't land on about:blank.
+      tab.location.replace(url);
+    } else {
+      // The pre-opened tab was blocked; try again, which may prompt the user.
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
   }
 
   const fieldClass =
