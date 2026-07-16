@@ -273,8 +273,8 @@ export const MENU: MenuCategory[] = [
         price: "$310",
       },
       {
-        name: "Fetuccine a la Beto",
-        desc: "Fetuccine con crema al vino blanco, espinaca, tomate cherry, chile pepper y queso parmesano.",
+        name: "Fettuccine a la Beto",
+        desc: "Fettuccine con crema al vino blanco, espinaca, tomate cherry, chile pepper y queso parmesano.",
         note: "Con pollo $120 · camarón $155",
         price: "$320",
       },
@@ -285,13 +285,13 @@ export const MENU: MenuCategory[] = [
     label: "Pizzas",
     dishes: [
       {
-        name: "Pizzeta de la Casa",
-        desc: "Pizzeta bañada con salsa pomodoro (receta secreta del chef), queso mozzarella, champiñón, salami, espinaca, alcachofa y queso feta.",
+        name: "Pizzetta de la Casa",
+        desc: "Pizzetta bañada con salsa pomodoro (receta secreta del chef), queso mozzarella, champiñón, salami, espinaca, alcachofa y queso feta.",
         price: "$300",
       },
       {
-        name: "Pizzeta de Pepperoni",
-        desc: "Pizzeta bañada con la salsa pomodoro (receta secreta del chef), queso mozzarella y rodajas de pepperoni.",
+        name: "Pizzetta de Pepperoni",
+        desc: "Pizzetta bañada con la salsa pomodoro (receta secreta del chef), queso mozzarella y rodajas de pepperoni.",
         price: "$285",
       },
     ],
@@ -456,7 +456,7 @@ export const SPECIALS: MenuCategory[] = [
         price: "$310",
       },
       {
-        name: "Gyosas",
+        name: "Gyozas",
         desc: "Rellenas de carne de puerco, servidas con edamames y salsa ponzu spicy.",
         price: "$220",
       },
