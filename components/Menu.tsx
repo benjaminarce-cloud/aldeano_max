@@ -33,10 +33,13 @@ export default function Menu() {
           lead="Una sola idea de la entrada a la barra: recetas de generaciones con la firma del Chef Beto González."
         />
 
+        {/* Fourteen categories wrap to six rows on a phone — 293px of tabs
+            before the first dish. Below md they scroll sideways in one row;
+            the partly-visible tab at the edge is the cue that they do. */}
         <div
           role="tablist"
           aria-label="Categorías del menú"
-          className="mb-12 flex flex-wrap gap-2.5"
+          className="mb-12 flex gap-2.5 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] md:flex-wrap md:overflow-x-visible md:pb-0 [&::-webkit-scrollbar]:hidden"
         >
           {MENU.map((cat, i) => {
             const selected = cat.id === active;
@@ -53,7 +56,7 @@ export default function Menu() {
                 tabIndex={selected ? 0 : -1}
                 onClick={() => setActive(cat.id)}
                 onKeyDown={(e) => onKeyDown(e, i)}
-                className={`rounded-[20px] border px-[18px] py-2.5 font-mono text-[.72rem] uppercase tracking-[.06em] transition-colors duration-200 ${
+                className={`shrink-0 whitespace-nowrap rounded-[20px] border px-[18px] py-2.5 font-mono text-[.72rem] uppercase tracking-[.06em] transition-colors duration-200 ${
                   selected
                     ? "border-achiote bg-achiote text-cal"
                     : "border-[rgba(241,232,217,.22)] text-cal-dim hover:border-oro hover:text-cal"
