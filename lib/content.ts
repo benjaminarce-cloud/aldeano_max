@@ -587,41 +587,68 @@ export type GalleryItem = {
   alt: string;
   /** Drawn over the photo. Omit when the photo already carries its own name. */
   caption?: string;
-  /** Keeps the photo's 4:5 shape instead of the wide interior crop. */
-  portrait?: boolean;
+  /**
+   * The photo has its name lettered into it. Such a tile takes no caption, and
+   * runs full width on phones, where a half-width tile makes that text
+   * unreadable.
+   */
+  lettered?: boolean;
+  /** Leads the gallery, full width until the grid opens to three columns. */
+  feature?: boolean;
 };
 
+/**
+ * Every tile is a 4:5 portrait, which is what lets the grid land as an even
+ * three-across. The interiors are shot at 2:3 and take a small crop to get
+ * there; they carry no lettering, so nothing is lost but a little ceiling.
+ */
 export const GALLERY: GalleryItem[] = [
   {
-    src: "/images/interior-1.png",
-    alt: "Planta alta · salón principal",
-    caption: "Planta alta · salón principal",
+    src: "/images/salon-doble-altura.jpg",
+    alt: "Salón principal de Aldeano: mesas de madera bajo lámparas de mimbre y helechos colgantes, con el logo sobre el muro de ladrillo blanco y el entrepiso al fondo.",
+    caption: "Salón principal · doble altura",
+    feature: true,
   },
   {
-    src: "/images/interior-2.png",
-    alt: "Planta baja · barra y doble altura",
-    caption: "Planta baja · barra y doble altura",
+    src: "/images/muro-doble-altura.jpg",
+    alt: "Muro de ladrillo blanco a doble altura con el logo de Aldeano iluminado, entre lámparas de mimbre y cuerdas colgantes.",
+    caption: "El muro de la casa",
+  },
+  {
+    src: "/images/barra.jpg",
+    alt: "La barra de Aldeano, con el logo en rojo sobre el frente y la estantería dorada retroiluminada detrás.",
+    caption: "La barra",
+  },
+  {
+    src: "/images/barra-destilados.jpg",
+    alt: "Estantería dorada de la barra con destilados, coctelería y cristalería.",
+    caption: "Destilados y cristalería",
+  },
+  {
+    src: "/images/escalera-mural.jpg",
+    alt: "Escalera de la casa junto al mural en blanco y negro.",
+    caption: "La escalera · mural",
   },
   // The dish photos are shot as cards with the name and description already
   // lettered on them, so they take no caption of their own.
   {
     src: "/images/maracugin.jpg",
     alt: "Maracugin: ginebra infusionada en flor mariposa con jarabe de maracuyá, servida con hojas de pandano.",
-    portrait: true,
+    lettered: true,
   },
   {
     src: "/images/camaron-thai.jpg",
     alt: "Camarón Thai: camarón con pasta udon, morrones y nuez de la India, servido sobre hoja de plátano.",
-    portrait: true,
+    lettered: true,
   },
   {
     src: "/images/rugantino.jpg",
     alt: "Rugantino: mezcal, vermouth rosso, frutos rojos y prosecco, con romero y naranja.",
-    portrait: true,
+    lettered: true,
   },
   {
     src: "/images/yaquesita.jpg",
     alt: "Yaquesita: bacanora, licor de chile, miel de agave y mezcla de cítricos, con escarchado de sal de chapulín.",
-    portrait: true,
+    lettered: true,
   },
 ];
