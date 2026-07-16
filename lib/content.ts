@@ -509,20 +509,50 @@ export const MENU_NOTE =
 
 /**
  * To add a photo: drop the file into /public/images/ and append an item here.
- * The grid lays tiles out evenly, so no span classes to keep in sync.
+ * The grid derives its spans from `portrait`, so there is nothing to keep in
+ * sync by hand.
  */
 export type GalleryItem = {
-  caption: string;
   src: string;
+  /** Alt text. Required even when no caption is drawn over the tile. */
+  alt: string;
+  /** Drawn over the photo. Omit when the photo already carries its own name. */
+  caption?: string;
+  /** Keeps the photo's 4:5 shape instead of the wide interior crop. */
+  portrait?: boolean;
 };
 
 export const GALLERY: GalleryItem[] = [
   {
-    caption: "Planta alta · salón principal",
     src: "/images/interior-1.png",
+    alt: "Planta alta · salón principal",
+    caption: "Planta alta · salón principal",
   },
   {
-    caption: "Planta baja · barra y doble altura",
     src: "/images/interior-2.png",
+    alt: "Planta baja · barra y doble altura",
+    caption: "Planta baja · barra y doble altura",
+  },
+  // The dish photos are shot as cards with the name and description already
+  // lettered on them, so they take no caption of their own.
+  {
+    src: "/images/maracugin.jpg",
+    alt: "Maracugin: ginebra infusionada en flor mariposa con jarabe de maracuyá, servida con hojas de pandano.",
+    portrait: true,
+  },
+  {
+    src: "/images/camaron-thai.jpg",
+    alt: "Camarón Thai: camarón con pasta udon, morrones y nuez de la India, servido sobre hoja de plátano.",
+    portrait: true,
+  },
+  {
+    src: "/images/rugantino.jpg",
+    alt: "Rugantino: mezcal, vermouth rosso, frutos rojos y prosecco, con romero y naranja.",
+    portrait: true,
+  },
+  {
+    src: "/images/yaquesita.jpg",
+    alt: "Yaquesita: bacanora, licor de chile, miel de agave y mezcla de cítricos, con escarchado de sal de chapulín.",
+    portrait: true,
   },
 ];

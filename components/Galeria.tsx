@@ -9,19 +9,37 @@ function GalleryTile({
   item: GalleryItem;
   priority: boolean;
 }) {
+  // Wide interior shots take two of the four columns; the dish cards keep their
+  // own 4:5 shape in one. The dish cards go full width on phones — their names
+  // are lettered into the photo, and at half of 375px that text is unreadable.
+  const shape = item.portrait
+    ? "col-span-2 aspect-[4/5] sm:col-span-1"
+    : "col-span-2 h-[280px] sm:h-[380px]";
+
+  // The scrim exists to keep a caption legible, so it only rides along with one.
+  const scrim = item.caption
+    ? "flex items-end p-4 after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/55 after:to-transparent after:to-55% after:content-['']"
+    : "";
+
   return (
-    <figure className="relative flex h-[280px] items-end overflow-hidden rounded-sm p-4 after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/55 after:to-transparent after:to-55% after:content-[''] sm:h-[380px]">
+    <figure className={`relative overflow-hidden rounded-sm ${shape} ${scrim}`}>
       <Image
         src={item.src}
-        alt={item.caption}
+        alt={item.alt}
         fill
-        sizes="(max-width: 768px) 100vw, 50vw"
+        sizes={
+          item.portrait
+            ? "(max-width: 640px) 100vw, (max-width: 768px) 50vw, 25vw"
+            : "(max-width: 768px) 100vw, 50vw"
+        }
         loading={priority ? "eager" : "lazy"}
         className="object-cover"
       />
-      <figcaption className="relative z-[2] font-mono text-[.7rem] uppercase tracking-[.06em] text-cal/85">
-        {item.caption}
-      </figcaption>
+      {item.caption ? (
+        <figcaption className="relative z-[2] font-mono text-[.7rem] uppercase tracking-[.06em] text-cal/85">
+          {item.caption}
+        </figcaption>
+      ) : null}
     </figure>
   );
 }
@@ -40,7 +58,7 @@ export default function Galeria() {
             </>
           }
         />
-        <div className="grid grid-cols-1 gap-3.5 md:grid-cols-2">
+        <div className="grid grid-cols-2 gap-3.5 md:grid-cols-4">
           {GALLERY.map((item, i) => (
             <GalleryTile key={item.src} item={item} priority={i === 0} />
           ))}
