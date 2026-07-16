@@ -8,6 +8,8 @@ import Galeria from "@/components/Galeria";
 import Info from "@/components/Info";
 import Reservaciones from "@/components/Reservaciones";
 import Footer from "@/components/Footer";
+import { OrderProvider } from "@/components/order/OrderContext";
+import OrderBar from "@/components/order/OrderBar";
 
 export default function Home() {
   return (
@@ -17,9 +19,14 @@ export default function Home() {
       <main>
         <Hero />
         <Historia />
-        <Especiales />
-        <TornDivider />
-        <Menu />
+        {/* Both priced sections share one running total, so the provider spans
+            them and the bar lives inside it. */}
+        <OrderProvider>
+          <Especiales />
+          <TornDivider />
+          <Menu />
+          <OrderBar />
+        </OrderProvider>
         <Galeria />
         <Info />
         <Reservaciones />

@@ -97,7 +97,7 @@ export default function Menu() {
               {columns.map((col, i) => (
                 <ul key={i}>
                   {col.map((dish) => (
-                    <DishRow key={dish.name} dish={dish} />
+                    <DishRow key={dish.name} dish={dish} groupId={cat.id} />
                   ))}
                 </ul>
               ))}

@@ -47,7 +47,7 @@ export default function Especiales() {
                   list in two leaves one column stranded. */}
               <ul className="gap-x-[70px] lg:columns-2">
                 {group.dishes.map((dish) => (
-                  <DishRow key={dish.name} dish={dish} />
+                  <DishRow key={dish.name} dish={dish} groupId={group.id} />
                 ))}
               </ul>
             </div>
