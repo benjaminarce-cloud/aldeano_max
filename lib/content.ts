@@ -524,6 +524,52 @@ export const SPECIALS: MenuCategory[] = [
   },
 ];
 
+/**
+ * Promo flyers. Like SPECIALS these are temporary — delete the entries and the
+ * files in /public/images to pull them.
+ *
+ * The price and terms are lettered into each image, so they exist only as
+ * pixels: `alt` carries the same words for search engines and screen readers,
+ * and `terms` repeats the essentials as real text under the flyer, which stays
+ * readable even where the artwork is too small to read.
+ *
+ * Because a price lives in the artwork, changing one means a new file — the
+ * card cannot be repriced from here.
+ */
+export type Promo = {
+  src: string;
+  alt: string;
+  /** Natural size, so the tile reserves its box before the image loads. */
+  width: number;
+  height: number;
+  /** The essentials, as text, under the flyer. */
+  terms: string;
+};
+
+export const PROMOS: Promo[] = [
+  {
+    src: "/images/promo-hamburguesa.jpg",
+    alt: "Promo hamburguesa más dos cervezas heladas por $300. Sólo Corona y Victoria.",
+    width: 1422,
+    height: 1422,
+    terms: "$300 · Sólo Corona y Victoria",
+  },
+  {
+    src: "/images/promo-verano.jpg",
+    alt: "Promoción de verano por $750: entrada de la casa, Mexicali a la playa, queso fundido, 2 tacos a elegir entre lengua o pork belly, 2 cervezas, tés helados o limonadas, 2 almejas al pomodoro y postre del Chef Beto. Válido de 1 a 7 PM, todo el mes de julio y agosto.",
+    width: 1424,
+    height: 1422,
+    terms: "$750 · De 1 a 7 PM · Julio y agosto",
+  },
+  {
+    src: "/images/promo-la-no-1.jpg",
+    alt: "La No.1, para 4 o hasta 5 personas, por $1,350: entrada de la casa, pizza de pepperoni, ensalada Monona o Romana a la parrilla, pasta Penne Mestre, pollo campirano, clericot o té helado y postre del día.",
+    width: 894,
+    height: 1424,
+    terms: "$1,350 · Para 4 o 5 personas",
+  },
+];
+
 /** Legal footnote printed at the foot of every page of the carta. */
 export const MENU_NOTE =
   "Todos nuestros platillos están hechos en casa con los mayores estándares de higiene. Los gramajes pueden variar de acuerdo con el tipo de preparación o cocción. En las presentaciones que no tienen ninguna cocción, el consumo es bajo su responsabilidad. Nuestros precios incluyen IVA y son en pesos mexicanos. Todas las modificaciones a los platillos tendrán un costo adicional.";

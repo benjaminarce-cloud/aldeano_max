@@ -1,7 +1,8 @@
+import Image from "next/image";
 import SectionHead from "./SectionHead";
 import DishRow from "./DishRow";
 import Reveal from "./Reveal";
-import { SPECIALS } from "@/lib/content";
+import { PROMOS, SPECIALS } from "@/lib/content";
 
 /**
  * The temporary specials sheet. Lives outside the carta's tabs so it can be
@@ -52,6 +53,46 @@ export default function Especiales() {
               </ul>
             </div>
           ))}
+        </Reveal>
+
+        {/* The flyers sit outside the card: they are their own artwork and the
+            bordered panel would frame a frame. Each links to the full file,
+            since the fine print does not survive a 350px column. */}
+        <Reveal delay={150} className="mt-14">
+          <h3 className="mb-8 flex items-center gap-4 font-mono text-[.72rem] uppercase tracking-[.14em] text-oro">
+            Promociones
+            <span
+              aria-hidden="true"
+              className="h-px flex-1 bg-[rgba(241,232,217,.14)]"
+            />
+          </h3>
+
+          <ul className="grid grid-cols-1 items-start gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {PROMOS.map((promo) => (
+              <li key={promo.src}>
+                <figure>
+                  <a
+                    href={promo.src}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block overflow-hidden rounded-sm border border-[rgba(185,139,62,.22)]"
+                  >
+                    <Image
+                      src={promo.src}
+                      alt={promo.alt}
+                      width={promo.width}
+                      height={promo.height}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="h-auto w-full transition-transform duration-[350ms] ease-out group-hover:scale-[1.03]"
+                    />
+                  </a>
+                  <figcaption className="mt-2.5 font-mono text-[.66rem] uppercase tracking-[.06em] text-cal-dim">
+                    {promo.terms}
+                  </figcaption>
+                </figure>
+              </li>
+            ))}
+          </ul>
         </Reveal>
       </div>
     </section>
