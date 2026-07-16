@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Historia from "@/components/Historia";
+import Especiales from "@/components/Especiales";
 import TornDivider from "@/components/TornDivider";
 import Menu from "@/components/Menu";
 import Galeria from "@/components/Galeria";
@@ -16,6 +17,7 @@ export default function Home() {
       <main>
         <Hero />
         <Historia />
+        <Especiales />
         <TornDivider />
         <Menu />
         <Galeria />

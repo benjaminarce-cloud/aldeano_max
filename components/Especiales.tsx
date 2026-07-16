@@ -1,0 +1,53 @@
+import SectionHead from "./SectionHead";
+import DishRow from "./DishRow";
+import { SPECIALS } from "@/lib/content";
+
+/**
+ * The temporary specials sheet. Lives outside the carta's tabs so it can be
+ * removed wholesale when the promotion ends — drop this from app/page.tsx and
+ * delete SPECIALS from lib/content.ts.
+ */
+export default function Especiales() {
+  return (
+    <section id="especiales" className="bg-bg pb-[110px]">
+      <div className="wrap">
+        <SectionHead
+          num="02 — Recomendaciones"
+          title={
+            <>
+              Fuera de{" "}
+              <em className="font-semibold italic text-achiote">carta</em>
+            </>
+          }
+          lead="Las recomendaciones del Chef Beto González y lo nuevo de la casa, por tiempo limitado."
+        />
+
+        <div className="rounded-sm border border-[rgba(185,139,62,.3)] bg-card px-6 py-10 sm:px-10 sm:py-12">
+          <span className="mb-10 inline-block rounded-[20px] border border-achiote px-3.5 py-1.5 font-mono text-[.66rem] uppercase tracking-[.14em] text-achiote">
+            Por tiempo limitado
+          </span>
+
+          {SPECIALS.map((group, i) => (
+            <div key={group.id} className={i > 0 ? "mt-14" : undefined}>
+              <h3 className="mb-8 flex items-center gap-4 font-mono text-[.72rem] uppercase tracking-[.14em] text-oro">
+                {group.label}
+                <span
+                  aria-hidden="true"
+                  className="h-px flex-1 bg-[rgba(241,232,217,.14)]"
+                />
+              </h3>
+              {/* Balanced columns rather than a fixed half-and-half split:
+                  the Frescos descriptions are long enough that slicing the
+                  list in two leaves one column stranded. */}
+              <ul className="gap-x-[70px] lg:columns-2">
+                {group.dishes.map((dish) => (
+                  <DishRow key={dish.name} dish={dish} />
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

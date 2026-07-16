@@ -31,7 +31,7 @@ export default function Galeria() {
     <section id="galeria" className="bg-bg pb-[60px] pt-[110px]">
       <div className="wrap">
         <SectionHead
-          num="03 — Galería"
+          num="04 — Galería"
           title={
             <>
               La mesa, la{" "}

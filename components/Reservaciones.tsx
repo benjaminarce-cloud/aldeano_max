@@ -156,7 +156,7 @@ export default function Reservaciones() {
     <section id="reservar" className="bg-bg pb-[130px] pt-[120px]">
       <div className="wrap">
         <SectionHead
-          num="05 — Reservaciones"
+          num="06 — Reservaciones"
           title={
             <>
               Aparta tu{" "}

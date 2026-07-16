@@ -6,7 +6,7 @@ export default function Info() {
     <section id="info" className="bg-bg-deep py-[110px]">
       <div className="wrap grid grid-cols-1 gap-11 lg:grid-cols-[.85fr_1.15fr] lg:gap-[70px]">
         <div>
-          <span className="sec-num">04 — Horario</span>
+          <span className="sec-num">05 — Horario</span>
           <h2 className="mb-6 font-serif text-[2rem] font-[340] leading-[1.05]">
             ¿Cuándo abrimos?
           </h2>

@@ -420,6 +420,87 @@ export const MENU: MenuCategory[] = [
   },
 ];
 
+/* ---------- carta temporal ---------- */
+
+/**
+ * The temporary specials sheet, kept apart from MENU so the promotion can be
+ * pulled in one piece: delete this block and drop <Especiales /> from
+ * app/page.tsx. Nothing else reads it.
+ */
+export const SPECIALS: MenuCategory[] = [
+  {
+    id: "recomendaciones",
+    label: "Recomendaciones",
+    dishes: [
+      {
+        name: "Aguachiles Tatemados",
+        tag: "Frescos",
+        desc: "Para los amantes del aguachile de camarón tenemos la versión del Chef Beto González, con una salsa tatemada hecha en casa.",
+        price: "$350",
+      },
+      {
+        name: "La Mazorca y el Mar",
+        tag: "Frescos",
+        desc: "Ceviche de atún. Descubre la armonía del mar y la tierra en esta mezcla fresca: atún, aguacate, cacahuate, elote desgranado, pepino, cebolla curtida y cilantro. Con una rica crema de la casa, gorgonzola y salsa macha.",
+        price: "$250",
+      },
+      {
+        name: "Tostada Bucanera",
+        tag: "Frescos",
+        desc: "Nuestra exquisita tostada está elaborada con atún, camarón y pulpo fresco, bañada en una salsa especial creada por el Chef Beto González.",
+        price: "$350",
+      },
+      {
+        name: "Hamburguesa Aldeano",
+        desc: "Preparada al carbón con la mejor selección de carne, acompañada de lechuga fresca, tomate, pepinillos y el aderezo especial del Chef Beto González.",
+        price: "$310",
+      },
+      {
+        name: "Gyosas",
+        desc: "Rellenas de carne de puerco, servidas con edamames y salsa ponzu spicy.",
+        price: "$220",
+      },
+    ],
+  },
+  {
+    id: "lo-nuevo",
+    label: "Lo nuevo",
+    dishes: [
+      {
+        name: "Salmón al Pesto",
+        desc: "Un buen trozo de salmón doradito por fuera y jugoso por dentro, servido sobre una pasta penne con nuestro pesto especial de pistache: cremosito y con un sabor único.",
+        price: "$499",
+      },
+      {
+        name: "Sashimi de Atún o Salmón",
+        desc: "Láminas frescas de atún o salmón, servidas con pepino y ajonjolí, bañadas en salsa ponzu, wasabi y jengibre curtido.",
+        note: "¿Con antojo de todo un poco? Este combo es para ti.",
+        price: "$299",
+      },
+      {
+        name: "Camarones Roka",
+        desc: "Trocitos de camarón crujientes, bañados en nuestro aderezo cremoso con un toque picante. Son tan adictivos que no vas a querer compartirlos.",
+        price: "$410",
+      },
+      {
+        name: "Champiñón Mediterráneo",
+        desc: "Champiñón sofrito con ajo, albahaca, manzana verde, vino blanco, queso parmesano y camarones, acompañado de una crema de queso gorgonzola y queso de cabra.",
+        price: "$410",
+      },
+      {
+        name: "Mexicali en la Playa",
+        desc: "Experimenta el sabor de una auténtica botana Mexicali en la playa: rica en camarón, pulpo y callo de almeja, preparada con pepino y aguacate frescos, más querreque veracruzano y un delicioso ceviche de atún y almejas al vapor en salsa arrabiata.",
+        price: "$320",
+      },
+      {
+        name: "Empanada de Rajas con Camarón",
+        desc: "Camarón sofrito con rajas, elote y queso menonita. Son absolutamente deliciosos.",
+        price: "$120",
+      },
+    ],
+  },
+];
+
 /** Legal footnote printed at the foot of every page of the carta. */
 export const MENU_NOTE =
   "Todos nuestros platillos están hechos en casa con los mayores estándares de higiene. Los gramajes pueden variar de acuerdo con el tipo de preparación o cocción. En las presentaciones que no tienen ninguna cocción, el consumo es bajo su responsabilidad. Nuestros precios incluyen IVA y son en pesos mexicanos. Todas las modificaciones a los platillos tendrán un costo adicional.";
