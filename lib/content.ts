@@ -7,8 +7,13 @@ export const RESTAURANT = {
   phoneTel: "+526868429240",
   // Where reservation messages are sent — deliberately a different line.
   whatsapp: "526865050041",
+  // The business listing (not just the street address), so the pin carries the
+  // Aldeano name. A /maps/place/ URL can't be iframed, so this is the embeddable
+  // form of the same place; mapUrl keeps the full listing for the click-through.
   mapEmbed:
-    "https://www.google.com/maps?q=C.+Novena+679,+21376+Mexicali,+B.C.&output=embed",
+    "https://www.google.com/maps?q=ALDEANO+RESTAURANTE,+C.+Novena+679,+21376+Mexicali,+B.C.&output=embed",
+  mapUrl:
+    "https://www.google.com/maps/place/ALDEANO+RESTAURANTE/@32.6358793,-115.3883538,17z/data=!3m1!4b1!4m6!3m5!1s0x80d771f602d1d98d:0x7bf8aa9f131ef267!8m2!3d32.6358793!4d-115.3857789!16s%2Fg%2F11vbp80tqr?hl=es-MX",
 } as const;
 
 export const NAV_LINKS = [

@@ -25,9 +25,9 @@ export default function Info() {
           </address>
         </div>
 
-        <div>
+        <div className="flex flex-col">
           <span className="sec-num">Ubicación</span>
-          <div className="h-full min-h-[320px] overflow-hidden rounded-sm border border-[rgba(241,232,217,.14)]">
+          <div className="min-h-[320px] flex-1 overflow-hidden rounded-sm border border-[rgba(241,232,217,.14)]">
             <iframe
               title={`Mapa de ${RESTAURANT.name}`}
               src={RESTAURANT.mapEmbed}
@@ -36,6 +36,14 @@ export default function Info() {
               className="h-full min-h-[320px] w-full border-0 [filter:grayscale(.3)_contrast(1.05)]"
             />
           </div>
+          <a
+            href={RESTAURANT.mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-flex items-center gap-1 self-start text-[.85rem] text-oro hover:underline"
+          >
+            Cómo llegar en Google Maps ↗
+          </a>
         </div>
       </div>
     </section>
