@@ -577,37 +577,25 @@ export const MENU_NOTE =
 /* ---------- galería ---------- */
 
 /**
- * To add a photo: drop the file into /public/images/ and append an item here.
- * The grid derives its spans from `portrait`, so there is nothing to keep in
- * sync by hand.
+ * Interior photography, shown in the carousel.
+ *
+ * Kept apart from the dish cards because the two behave differently: these are
+ * plain photographs, so they take a caption and keep their native 2:3 rather
+ * than being cropped square-ish to fit a grid.
+ *
+ * To add one: drop the file into /public/images/ and append here.
  */
-export type GalleryItem = {
+export type Interior = {
   src: string;
-  /** Alt text. Required even when no caption is drawn over the tile. */
   alt: string;
-  /** Drawn over the photo. Omit when the photo already carries its own name. */
-  caption?: string;
-  /**
-   * The photo has its name lettered into it. Such a tile takes no caption, and
-   * runs full width on phones, where a half-width tile makes that text
-   * unreadable.
-   */
-  lettered?: boolean;
-  /** Leads the gallery, full width until the grid opens to three columns. */
-  feature?: boolean;
+  caption: string;
 };
 
-/**
- * Every tile is a 4:5 portrait, which is what lets the grid land as an even
- * three-across. The interiors are shot at 2:3 and take a small crop to get
- * there; they carry no lettering, so nothing is lost but a little ceiling.
- */
-export const GALLERY: GalleryItem[] = [
+export const INTERIORS: Interior[] = [
   {
     src: "/images/salon-doble-altura.jpg",
     alt: "Salón principal de Aldeano: mesas de madera bajo lámparas de mimbre y helechos colgantes, con el logo sobre el muro de ladrillo blanco y el entrepiso al fondo.",
     caption: "Salón principal · doble altura",
-    feature: true,
   },
   {
     src: "/images/muro-doble-altura.jpg",
@@ -629,26 +617,35 @@ export const GALLERY: GalleryItem[] = [
     alt: "Escalera de la casa junto al mural en blanco y negro.",
     caption: "La escalera · mural",
   },
-  // The dish photos are shot as cards with the name and description already
-  // lettered on them, so they take no caption of their own.
+];
+
+/**
+ * Dish and drink cards, shown as a grid under the carousel.
+ *
+ * Plain food photographs, cropped to a 4:5 card. Unlike the carousel photos
+ * they carry no caption — the grid reads as a quick mosaic, and a portrait shot
+ * loses a little top and bottom to the crop.
+ */
+export type DishCard = {
+  src: string;
+  alt: string;
+};
+
+export const GALLERY: DishCard[] = [
   {
-    src: "/images/maracugin.jpg",
-    alt: "Maracugin: ginebra infusionada en flor mariposa con jarabe de maracuyá, servida con hojas de pandano.",
-    lettered: true,
+    src: "/images/rib-eye-brasa.jpg",
+    alt: "Rib Eye a la brasa sobre tabla de madera, con espárragos asados, papa al horno, rodajas de chorizo argentino y tomates cherry, junto a una ensalada.",
   },
   {
-    src: "/images/camaron-thai.jpg",
-    alt: "Camarón Thai: camarón con pasta udon, morrones y nuez de la India, servido sobre hoja de plátano.",
-    lettered: true,
+    src: "/images/mariscos-michelada.jpg",
+    alt: "Coctel de camarón, tacos dorados con costra y tostada de ceviche, con una michelada escarchada y una cerveza Negra Modelo.",
   },
   {
-    src: "/images/rugantino.jpg",
-    alt: "Rugantino: mezcal, vermouth rosso, frutos rojos y prosecco, con romero y naranja.",
-    lettered: true,
+    src: "/images/almejas-vapor.jpg",
+    alt: "Almejas al vapor en caldillo, servidas en plato triangular con pan tostado y una cerveza Stella Artois.",
   },
   {
-    src: "/images/yaquesita.jpg",
-    alt: "Yaquesita: bacanora, licor de chile, miel de agave y mezcla de cítricos, con escarchado de sal de chapulín.",
-    lettered: true,
+    src: "/images/cocteleria-autor.jpg",
+    alt: "Tres cocteles de autor escarchados en la terraza, decorados con frutos rojos y hierbas, a contraluz del atardecer.",
   },
 ];
