@@ -625,32 +625,79 @@ export const INTERIORS: Interior[] = [
 ];
 
 /**
- * Dish and drink cards, shown as a grid under the carousel.
+ * Dish and drink cards, shown as a stacked masonry grid under the carousel.
  *
- * Plain food photographs, cropped to a 4:5 card. Unlike the carousel photos
- * they carry no caption — the grid reads as a quick mosaic, and a portrait shot
- * loses a little top and bottom to the crop.
+ * Plain food photographs at their native crop — unlike the carousel photos
+ * they carry no caption, and unlike a uniform grid each keeps its own height
+ * so the columns stack like a Pinterest-style mosaic. width/height are the
+ * source pixel dimensions, used to reserve the right aspect ratio per card.
  */
 export type DishCard = {
   src: string;
   alt: string;
+  width: number;
+  height: number;
 };
 
 export const GALLERY: DishCard[] = [
   {
     src: "/images/rib-eye-brasa.jpg",
     alt: "Rib Eye a la brasa sobre tabla de madera, con espárragos asados, papa al horno, rodajas de chorizo argentino y tomates cherry, junto a una ensalada.",
+    width: 794,
+    height: 1192,
   },
   {
     src: "/images/mariscos-michelada.jpg",
     alt: "Coctel de camarón, tacos dorados con costra y tostada de ceviche, con una michelada escarchada y una cerveza Negra Modelo.",
+    width: 790,
+    height: 1202,
   },
   {
     src: "/images/almejas-vapor.jpg",
     alt: "Almejas al vapor en caldillo, servidas en plato triangular con pan tostado y una cerveza Stella Artois.",
+    width: 798,
+    height: 1194,
   },
   {
     src: "/images/cocteleria-autor.jpg",
     alt: "Tres cocteles de autor escarchados en la terraza, decorados con frutos rojos y hierbas, a contraluz del atardecer.",
+    width: 796,
+    height: 1192,
+  },
+  {
+    src: "/images/tamal-costra-flor.jpg",
+    alt: "Tamal con costra crujiente sobre hoja de maíz, bañado en salsa de achiote, acompañado de totopos y flor comestible.",
+    width: 733,
+    height: 1280,
+  },
+  {
+    src: "/images/tartar-costra.jpg",
+    alt: "Tartar de mariscos con costra crujiente, bañado en aderezo especiado sobre hoja de plátano.",
+    width: 909,
+    height: 1280,
+  },
+  {
+    src: "/images/ceviches-tostadas.jpg",
+    alt: "Copa de camarones al estilo Sinaloa con aguacate, taco gratinado y tostada de atún, servidos en la barra.",
+    width: 960,
+    height: 1280,
+  },
+  {
+    src: "/images/ensalada-parrilla-tocino.jpg",
+    alt: "Lechugas romanas a la parrilla bañadas en aderezo cremoso con tocino tronado.",
+    width: 731,
+    height: 1280,
+  },
+  {
+    src: "/images/coctel-sandia.jpg",
+    alt: "Coctel de sandía escarchado con chile-sal, decorado con una paleta de sandía y hierbabuena.",
+    width: 960,
+    height: 1280,
+  },
+  {
+    src: "/images/coctel-kiwi.jpg",
+    alt: "Coctel verde con espuma y una rodaja de kiwi sobre una mesa de madera.",
+    width: 1024,
+    height: 1280,
   },
 ];
