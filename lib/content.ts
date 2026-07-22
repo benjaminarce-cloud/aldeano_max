@@ -700,4 +700,16 @@ export const GALLERY: DishCard[] = [
     width: 1024,
     height: 1280,
   },
+  {
+    src: "/images/pastel-matcha-flor.jpg",
+    alt: "Mini pastel de matcha y queso crema, decorado con una flor comestible y barras de chocolate Andes.",
+    width: 970,
+    height: 1280,
+  },
+  {
+    src: "/images/coctel-ambar-romero.jpg",
+    alt: "Coctel ámbar con espuma, decorado con una rodaja de cítrico deshidratado y una ramita de romero.",
+    width: 861,
+    height: 1280,
+  },
 ];
